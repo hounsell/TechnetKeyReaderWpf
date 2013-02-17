@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="TechnetKeyReaderWpf.controlTemplates"
+                    x:ClassModifier="public">
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="productItem">
+        <Setter Property="ContentTemplate" Value="{DynamicResource productItemDeselected}" />
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="ContentTemplate" Value="{DynamicResource productItemSelected}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <DataTemplate x:Key="productItemDeselected">
+        <StackPanel>
+            <TextBlock Text="{Binding name}" FontSize="16" Foreground="White" />
+            <TextBlock Text="{Binding keysNum}" FontSize="14" Foreground="White" />
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="productItemSelected">
+        <StackPanel>
+            <TextBlock Text="{Binding name}" FontSize="16" Foreground="White" />
+            <TextBlock Text="{Binding keysNum}" FontSize="14" Foreground="White" />
+            <ListBox Background="{x:Null}" BorderThickness="0" ItemsSource="{Binding keys}" ItemTemplate="{DynamicResource keyItem}" />
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="keyItem">
+        <StackPanel>
+            <TextBlock Text="{Binding key}" Foreground="White" FontSize="12" Margin="0,4">
+                <TextBlock.ContextMenu>
+                    <ContextMenu Name="keyRcMenu">
+                        <MenuItem Header="Copy Name" Click="keyCopyName" />
+                        <MenuItem Header="Copy Key" Click="keyCopyKey" />
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
